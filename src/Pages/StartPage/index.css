@@ -1,0 +1,88 @@
+.sp-main {
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sp-container {
+    height: max-content;
+    width: 600px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.sp-box-1 {
+    height: 280px;
+    width: 400px;
+    /* background-color: green; */
+    position: relative;
+}
+
+.sp-b-txt {
+    font-size: 60px;
+    font-weight: 800;
+    color: white;
+    position: absolute;
+    top: 100px;
+    right: 130px;
+}
+
+.sp-btn {
+    height: 70px;
+    background-color: #533B7C;
+    width: 360px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sp-btn-txt {
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    margin-left: 10px;
+}
+
+.sp-btn1 {
+    height: 70px;
+    background-color: #7E6DF3;
+    width: 400px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.txt-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+    width: 100%;
+    /* background-color: yellow; */
+}
+
+.txt-div-1 {
+    font-size: 23px;
+    font-weight: 800;
+    color: #533B7C;
+    opacity: 80%;
+}
+
+.txt-div-2 {
+    font-size: 13px;
+    color: lightgray;
+    opacity: 80%;
+    font-weight: 600;
+}

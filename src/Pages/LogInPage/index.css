@@ -1,0 +1,103 @@
+.lp-main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #533B7C;
+}
+
+.lp-box {
+    height: max-content;
+    width: 300px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding : 40px 25px 40px 25px;
+}
+.lg-title-div{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+.lg-title {
+   color:#533B7C;
+   font-weight: 700;
+   font-size: 20px;
+}
+.lg-title-txt{
+    font-size: 10px;
+    color: lightgray;
+}
+
+.lg-form-div-container {
+    /* background-color: red; */
+    width: 100%;
+    margin: 15px 0px 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.lg-form-div{
+    /* background-color: green; */
+    /* margin-bottom: 10px; */
+    width: 100%;
+}
+.lg-form-text{
+    font-size: 12px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+.lg-form-input{
+    height: 30px;
+    width: 97%;
+    padding-left: 5px;
+    border:lightgray solid 1px ;
+    border-radius: 4px;
+    font-size: 12px;
+}
+.lg-form-input:focus{
+    outline: none;
+}
+
+.lg-fPass-text{
+    font-size: 13px;
+    margin-top: 5px;
+}
+.lg-span-text{
+    text-decoration: underline;
+    font-weight: 700;
+    cursor: pointer;
+}
+.lg-button{
+    height: 35px;
+    width: 100%;
+    margin-bottom: 15px;
+    /* border: lightgray solid 1px; */
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #533B7C;
+}
+.lg-button-text{
+    font-weight: 700;
+    font-size: 13px;
+    color: white;
+}
+.lg-new{
+    font-size: 10px;
+    color: lightgray;
+}
+.lg-span-new-id{
+   color: #533B7C;
+    font-weight: 700;
+    cursor: pointer;
+}

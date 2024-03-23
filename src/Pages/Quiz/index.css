@@ -1,0 +1,208 @@
+.quiz-main{
+    height: 100vh;
+    width: 100%;
+    background-color:#533B7C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.quiz-container{
+    height: max-content;
+    width: 80%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: yellow; */
+}
+.quiz-top{
+    height: 140px;
+    width: 100%;
+    /* background-color: red; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+.quiz-timer-div{
+    /* background-color: green; */
+    display: flex;
+    flex-direction:row;
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    color: white;
+}
+.quiz-timer-sub-div{
+    /* background-color: rgb(192, 192, 137); */
+    font-size: 20px;
+    margin: 3px;
+    height: max-content;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.quiz-timer-txt{
+    font-size: 17px;
+    font-weight: 600;
+
+}
+.quiz-timer-time{
+    font-size:17px;
+}
+.quiz-top-txt{
+    font-size: 25px;
+    color: white;
+    font-weight: 600;
+    position: absolute;
+    right: 10px;
+    top:60px
+}
+.quiz-question{
+    height: 100px;
+    width: 100%;
+    border-radius: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+}
+.quiz-options-div{
+    /* background-color: green; */
+    width: 100%;
+    margin: 15px 0 0 0 ;
+    height: 100px;
+}
+.quiz-options-box{
+    /* background-color: red; */
+    display: flex;
+    height: max-content;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    
+}
+.options{
+    height: 50px;
+    /* background-color: blue; */
+    width: 45%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    border: lightgray solid 1px;
+    color: white;
+}
+.clicked{
+    background-color: rgb(243, 238, 238);
+ color:#000;
+}
+.question-text{
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+}
+.options-text{
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 20px;
+}
+.quiz-buttons-container{
+    height: 60px;
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.quiz-button{
+    height: 35px;
+    width: 12%;
+    border:none;
+    background-color: #7E6DF3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.quiz-button-restart{
+    height: 70px;
+    width: 27%;
+    background-color: #7E6DF3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+}
+.logOut-btn{
+    height: 50px;
+    width: 10%;
+    background-color: #7E6DF3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    margin-top: 20px;
+    /* position: absolute; */
+    /* right: 480px;
+    bottom: 140px; */
+}
+.quiz-button-text{
+    font-size: 15px;
+    font-weight: 600;
+    opacity: 80%;
+    color: white;
+}
+.score-box{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:20px;
+    background-color: #533B7C;
+    /* position: relative; */
+}
+.scb-title{
+    font-size: 45px;
+    font-weight: 700;
+    color: #fff;
+}
+.quiz-button-text-sb{
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    margin-left: 15px;
+}
+.scb-txt1{
+    font-size: 16px;
+    color: lightgray;
+}
+.scb-txt2{
+    font-size: 28px;
+    color: #fff;
+    opacity: 90%;
+    font-weight: 600;
+}
+.scb-txt3{
+    font-size: 40px;
+    color: #fff;
+    opacity: 90%;
+    font-weight: 600;
+}
