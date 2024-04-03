@@ -117,7 +117,8 @@ const SignUpPage = () => {
                         FirstName: firstName,
                         LastName: lastName,
                         Email: email,
-                        Password: password
+                        Password: password,
+                        type: "user"
                     });
                     console.log("Document written with ID: ", docRef);
                 } catch (e) {

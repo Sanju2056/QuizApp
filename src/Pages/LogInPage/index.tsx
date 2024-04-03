@@ -3,9 +3,10 @@ import { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { userSession } from '../../App';
-import { getDocs } from 'firebase/firestore';
+import { getDocs, collection, query, where, Query } from 'firebase/firestore';
 import { signInWithCredential } from 'firebase/auth';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { db } from '../../firebase';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -17,26 +18,36 @@ const LoginPage = () => {
 
   const auth = getAuth();
 
-  const handleSubmit = (e) => {
+  
+
+  const handleSubmit =  (e) => {
     console.log('he')
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user)
-        setCurrentUser(user.email)
-        console.log(currentUser)
+    .then(async(userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user)
+      setCurrentUser(user.email)
+      console.log(currentUser)
+      const q = query(collection(db, "Users-Credentials"), where("Email", "==", user.email));
+      const fireBaseData = await getDocs(q);
+      // console.log(fireBaseData.docs)
+      fireBaseData.docs.forEach(async (document) => {
+        const TimeArray = document.data()
+        console.log(TimeArray)
         // ...
-        navigate('/quiz')
+        navigate('/startPage')
+      })
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        if(errorCode ==  'auth/invalid-credential'){
+        if (errorCode == 'auth/invalid-credential') {
           alert("Email doesn't exist ")
         }
-        console.log(errorCode,errorMessage)
-        
+        console.log(errorCode, errorMessage)
+
       });
     e.preventDefault()
     // console.log(email, password)
@@ -134,6 +145,7 @@ const LoginPage = () => {
             </div>
           </div>
         </div> */}
+        
       </div>
     </div>
   )
