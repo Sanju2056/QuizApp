@@ -3,8 +3,7 @@ import { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { userSession } from '../../App';
-import { getDocs, collection, query, where, Query } from 'firebase/firestore';
-import { signInWithCredential } from 'firebase/auth';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { db } from '../../firebase';
 
@@ -20,7 +19,7 @@ const LoginPage = () => {
 
   
 
-  const handleSubmit =  (e) => {
+  const handleSubmit =  (e:any) => {
     console.log('he')
     signInWithEmailAndPassword(auth, email, password)
     .then(async(userCredential) => {
@@ -81,9 +80,6 @@ const LoginPage = () => {
     // console.log(hour)
   }
 
-  const timer = () => {
-    const startTimer = setInterval(convertTime, 1000)
-  }
 
   useEffect(() => {
     console.log(currentUser)

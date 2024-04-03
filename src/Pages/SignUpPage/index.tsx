@@ -3,7 +3,7 @@ import { useState ,} from 'react'
 import { Link } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from '../../firebase';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 const SignUpPage = () => {
     const [email, setEmail] = useState<string | undefined>();
@@ -18,7 +18,7 @@ const SignUpPage = () => {
         setTermCheck(!termCheck)
     }
 
-    const formValidation = async (e) => {
+    const formValidation = async (e:any) => {
 
         e.preventDefault();
 
@@ -28,14 +28,21 @@ const SignUpPage = () => {
         const lNameRegExp = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/
 
 
-        if (emailRegExp.test(email) && email.length) {
-            console.log('valid email')
-        } else {
-            console.log('invalid email')
-            return
-        }
+        // if (emailRegExp.test(email) && email.length) {
+        //     console.log('valid email')
+        // } else {
+        //     console.log('invalid email')
+        //     return
+        // }
 
-        if (passwordRegExp.test(password) && password?.length) {
+         if (email && emailRegExp.test(email) && email.length) {
+                console.log('valid email')
+            } else {
+                console.log('invalid email')
+                return
+            }
+
+        if (password && passwordRegExp.test(password) && password.length) {
             console.log('valid password')
         } else {
             console.log('invalid password')
@@ -49,14 +56,14 @@ const SignUpPage = () => {
             return
         }
 
-        if (nameRegExp.test(firstName) && firstName?.length) {
+        if (firstName && nameRegExp.test(firstName) && firstName?.length) {
             console.log('valid name')
         } else {
             console.log('invalid name')
             return
         }
 
-        if (lNameRegExp.test(lastName) && lastName?.length) {
+        if (lastName && lNameRegExp.test(lastName) && lastName?.length) {
             console.log('valid name')
         } else {
             console.log('invalid name')
