@@ -5,6 +5,7 @@ import LoginPage from './Pages/LogInPage'
 import Quiz from './Pages/Quiz'
 import StartPage from './Pages/StartPage'
 import ScoreSheet from './Pages/ScoreSheet'
+import AdminPage from './Pages/AdminPage'
 import { Route, Routes } from 'react-router-dom'
 import { createContext,useState } from 'react'
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='/quiz' element={<Quiz />} />
           <Route path='/startPage' element={<StartPage />} />
           <Route path='/scoreSheet' element={<ScoreSheet />} />
+          <Route path='/adminPage' element={<AdminPage/>} />
         </Routes>
       </userSession.Provider>
     </div>

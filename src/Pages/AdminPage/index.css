@@ -1,0 +1,69 @@
+.admin-page {
+    height: 100vh;
+    background-color: #533B7C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-form {
+    height: 380px;
+    width: 600px;
+    background-color: #fafafa;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-question-title {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.admin-question-field {
+    height: 120px;
+    width: 500px;
+    outline: none;
+    font-size: 18px;
+    border-radius: 2px;
+    border: #533B7C solid 1px;
+    padding-left: 5px;
+}
+
+.options-container {
+    width: 90%;
+    /* background-color: red; */
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.options-label {
+    font-size: 14px;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
+.options-input {
+    height: 25px;
+    width: 180px;
+    outline: none;
+    font-size: 14px;
+    padding-left: 5px;
+    border: #533B7C solid 1px;
+    border-radius: 2px;
+}
+
+.admin-submit-btn {
+    height: 35px;
+    width: 200px;
+    background-color: #533B7C;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}

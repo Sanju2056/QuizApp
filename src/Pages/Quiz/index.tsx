@@ -9,7 +9,6 @@ import { collection, addDoc, getDocs, updateDoc, doc, query, where } from "fireb
 import { db } from '../../firebase'
 const Quiz = () => {
     const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
-    const [storeTiming, setStoreTiming] = useState()
     const [interv, setInterv] = useState();
     const [status, setStatus] = useState(0);
     const { currentUser, setCurrentUser } = useContext(userSession)

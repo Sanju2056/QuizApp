@@ -70,15 +70,15 @@ const LoginPage = () => {
 
   // const [minute, setMinute] = useState()
   // const [hour, setHour] = useState()
-  let second = 0;
-  const convertTime = () => {
-    second++;
-    console.log(second)
+  // let second = 0;
+  // const convertTime = () => {
+  //   second++;
+  //   console.log(second)
     // setMinute(second % 60);
     // console.log(minute)
     // setHour(minute % 60);
     // console.log(hour)
-  }
+  // }
 
 
   useEffect(() => {
