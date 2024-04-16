@@ -160,7 +160,7 @@ const Quiz = () => {
         const userCredentialCollection = collection(db, "PlayersScoreInfo")
         const querySnapshot = await getDocs(query(userCredentialCollection, where("Email", "==", currentUser)));
         console.log(querySnapshot)
-        window.alert(querySnapshot.empty.toString())
+        // window.alert(querySnapshot.empty.toString())
         if (querySnapshot.empty) {
             // window.alert("empty firebase")
             addNewUser()

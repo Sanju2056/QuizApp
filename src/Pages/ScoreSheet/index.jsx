@@ -8,7 +8,7 @@ import home from '/home.png'
 const ScoreSheet = () => {
     const [timeRecords, setTimeRecords] = useState([])
     const fetchFrmFb = async () =>{
-        const fireBaseData = await getDocs(collection(db, "User-Credential"))
+        const fireBaseData = await getDocs(collection(db, "PlayersScoreInfo"))
         fireBaseData.docs.forEach(async (document) => {
           console.log(document.data())
           const TimeArray =  document.data().Time
