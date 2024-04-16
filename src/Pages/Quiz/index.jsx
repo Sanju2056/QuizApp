@@ -288,7 +288,7 @@ const Quiz = () => {
             const shuffledUseEffect = shuffleOptions(options);
             setShuffledOptions(shuffledUseEffect);
         }
-    }, [currentIndex, quiz]);
+    }, [currentIndex, questionArray]);
 
     useEffect(() => {
         let interval = setInterval(run, 10)
