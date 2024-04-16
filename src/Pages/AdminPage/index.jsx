@@ -22,8 +22,8 @@ const AdminPage = () => {
       CorrectOption: correctOption
     }]
     // if(JSON.stringify(QuizDetails))
-    const options = (JSON.stringify(QuizDetails[0].Options))
-    const CorrectOption = (JSON.stringify(QuizDetails[0].CorrectOption))
+    const options = QuizDetails[0].Options
+    const CorrectOption = QuizDetails[0].CorrectOption
     console.log(options)
     console.log(CorrectOption)
     if (options.indexOf(CorrectOption) !== -1) {
@@ -35,6 +35,7 @@ const AdminPage = () => {
           CorrectOption: correctOption
         });
         console.log("Document written with ID:",docRef);
+        alert("Question added successfully!")
       }
       catch(e){
         console.log("Error adding document",e)

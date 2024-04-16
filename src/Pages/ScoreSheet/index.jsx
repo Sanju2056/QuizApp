@@ -12,7 +12,7 @@ const ScoreSheet = () => {
         fireBaseData.docs.forEach(async (document) => {
           console.log(document.data())
           const TimeArray =  document.data().Time
-          TimeArray.forEach((TimeArrayDetail:any)=>{
+          TimeArray.forEach((TimeArrayDetail)=>{
               console.log(TimeArrayDetail.Score,TimeArrayDetail.TimeTaken)
           })
           console.log(TimeArray)        
@@ -173,7 +173,7 @@ const ScoreSheet = () => {
                 </div>
                 <div className='info-div'>
                     {
-                        timeRecords.map((item: any,ind) => {
+                        timeRecords.map((item,ind) => {
                             return (
                                 <div className='score-headings1'>
                                     <div className='score-div1'>

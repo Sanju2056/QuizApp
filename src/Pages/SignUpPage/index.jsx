@@ -6,11 +6,11 @@ import { db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 const SignUpPage = () => {
-    const [email, setEmail] = useState<string | undefined>();
-    const [password, setPassword] = useState<string | undefined>();
-    const [firstName, setFirstName] = useState<string | undefined>();
-    const [lastName, setLastName] = useState<string | undefined>();
-    const [confirmPassword, setConfirmPassword] = useState<string | undefined>();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
     const [termCheck, setTermCheck] = useState(false)
 
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ const SignUpPage = () => {
         setTermCheck(!termCheck)
     }
 
-    const formValidation = async (e:any) => {
+    const formValidation = async (e) => {
 
         e.preventDefault();
 

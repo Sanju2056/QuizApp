@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   
 
-  const handleSubmit =  (e:any) => {
+  const handleSubmit =  (e) => {
     console.log('he')
     signInWithEmailAndPassword(auth, email, password)
     .then(async(userCredential) => {

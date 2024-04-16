@@ -7,15 +7,26 @@ import { userSession } from '../../App';
 import { getAuth, signOut } from "firebase/auth";
 import { collection, addDoc, getDocs, updateDoc, doc, query, where } from "firebase/firestore";
 import { db } from '../../firebase'
+
+
 const Quiz = () => {
     const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
     const [interv, setInterv] = useState();
     const [status, setStatus] = useState(0);
     const { currentUser, setCurrentUser } = useContext(userSession)
+    const [questionArray, setQuestionArray] = useState([])
+    
+    // Get question from firebase
+    const questionRef = async () =>{
+    const quizInfo = await getDocs(collection(db,"QuestionArray"))
+     const quizArray = (quizInfo.docs.map(doc=>doc.data()))  
+     setQuestionArray(quizArray)
+    }
     useEffect(() => {
         console.log('hello')
         console.log(currentUser, "current User")
-
+        questionRef()
+        console.log(questionArray)
     }, [currentUser])
     // Not started = 0
     // started = 1
@@ -45,7 +56,7 @@ const Quiz = () => {
         updatedMs++;
         return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
     };
-    
+
 
 
     // UPDATE TIME AND SCORE OF USER IN DB
@@ -78,7 +89,7 @@ const Quiz = () => {
     //         })
     //     }
     //     try {
-    //         const docRef = await updateDoc(doc(db, "User-Credential", document.id), {
+    //         const docRef = await updateDoc(doc(db, "PlayersScoreInfo", document.id), {
     //             Email: currentUser,
     //             Time: timeRecord
     //         });
@@ -94,7 +105,7 @@ const Quiz = () => {
     // }
 
     // })
-    const updateTimeOfUser = async (MatchingUser:any) => {
+    const updateTimeOfUser = async (MatchingUser) => {
         console.log(MatchingUser)
         let timeRecord = MatchingUser[0].Time;
         console.log('time record', timeRecord)
@@ -114,7 +125,7 @@ const Quiz = () => {
             console.log("time record else part")
         }
         try {
-            await updateDoc(doc(db, "User-Credential", MatchingUser[0].id), {
+            await updateDoc(doc(db, "PlayersScoreInfo", MatchingUser[0].id), {
                 Time: timeRecord
             });
             console.log("Successfully updated ");
@@ -126,7 +137,7 @@ const Quiz = () => {
     }
     const addNewUser = async () => {
         try {
-            const docRef = await addDoc(collection(db, "User-Credential"), {
+            const docRef = await addDoc(collection(db, "PlayersScoreInfo"), {
                 Email: currentUser,
                 Time: [{
                     Score: score,
@@ -146,7 +157,7 @@ const Quiz = () => {
         setStatus(2);
         // ADD NEW USER IN DB
         console.log(time)
-        const userCredentialCollection = collection(db, "User-Credential")
+        const userCredentialCollection = collection(db, "PlayersScoreInfo")
         const querySnapshot = await getDocs(query(userCredentialCollection, where("Email", "==", currentUser)));
         console.log(querySnapshot)
         window.alert(querySnapshot.empty.toString())
@@ -162,22 +173,22 @@ const Quiz = () => {
         }
     };
 
-        // FOR LOCAL STORAGE
-        // const data = JSON.parse(localStorage.getItem("userInfo"))
-        // //filteredData array ma auxa , tarw  condition true vaye paxi auta matra value return hunxa ani [O] gryo vane tyo array direct object ma convert hunxa ani sajilo hunxa 
-        // const filteredData = data.filter((value) => value.email == currentUser)[0]
-        // console.log(filteredData)
-        // //time vanne naya key value set gareko 
-        // if (filteredData?.time?.length) {
-        //     filteredData.time.push({ "time": time, "score": score })
-        // } else {
-        //     filteredData.time = []
-        //     filteredData.time.push({ "time": time, "score": score })
-        // }
-        //time vanne value lai local storage ma save gareko
-        // localStorage.setItem("userInfo", JSON.stringify(data))
-        // const datas = JSON.parse(localStorage.getItem("userInfo"))
-        // console.log(datas.map((value) => { console.log(value) }))
+    // FOR LOCAL STORAGE
+    // const data = JSON.parse(localStorage.getItem("userInfo"))
+    // //filteredData array ma auxa , tarw  condition true vaye paxi auta matra value return hunxa ani [O] gryo vane tyo array direct object ma convert hunxa ani sajilo hunxa 
+    // const filteredData = data.filter((value) => value.email == currentUser)[0]
+    // console.log(filteredData)
+    // //time vanne naya key value set gareko 
+    // if (filteredData?.time?.length) {
+    //     filteredData.time.push({ "time": time, "score": score })
+    // } else {
+    //     filteredData.time = []
+    //     filteredData.time.push({ "time": time, "score": score })
+    // }
+    //time vanne value lai local storage ma save gareko
+    // localStorage.setItem("userInfo", JSON.stringify(data))
+    // const datas = JSON.parse(localStorage.getItem("userInfo"))
+    // console.log(datas.map((value) => { console.log(value) }))
 
     const reset = () => {
         clearInterval(interv);
@@ -190,12 +201,12 @@ const Quiz = () => {
     const [score, setScore] = useState(0)
     const [showScore, setShowScore] = useState(false)
     const [selectedOption, setSelectedOption] = useState('')
-    const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
+    const [shuffledOptions, setShuffledOptions] = useState([]);
     const [qstnCount, setQstnCount] = useState(1)
 
     // Load Next Question
     const updateNextQuestion = () => {
-        if (currentIndex < quiz.length - 1) {
+        if (currentIndex < questionArray.length - 1) {
             // Selected Option is correct or not
             // Option Selected or not 
             if (selectedOption === '') {
@@ -203,13 +214,13 @@ const Quiz = () => {
             }
 
             else {
-                if (selectedOption === quiz[currentIndex].correctAnswer) {
-                    setScore((prev: any) => {
+                if (selectedOption === questionArray[currentIndex].CorrectOption) {
+                    setScore((prev) => {
                         return prev + 1
                     })
                     console.log(score)
                 }
-                setCurrentIndex((prev: any) => {
+                setCurrentIndex((prev) => {
                     return prev + 1
                 })
                 setSelectedOption('')
@@ -226,7 +237,7 @@ const Quiz = () => {
 
     // Load Previous Question
     const updatePrevQuestion = () => {
-        setCurrentIndex((prev: any) => {
+        setCurrentIndex((prev) => {
 
             // At initial state disable next button
             if (currentIndex <= 0) {
@@ -243,7 +254,7 @@ const Quiz = () => {
     }
 
     // Selected Option
-    const checkOptions = (item: any) => {
+    const checkOptions = (item) => {
         setSelectedOption(item)
         console.log(item)
         // if(currentIndex == quiz.length){
@@ -261,7 +272,7 @@ const Quiz = () => {
     }
 
     // Function to shuffle options
-    const shuffleOptions = (options: any) => {
+    const shuffleOptions = (options) => {
         const shuffled = [...options];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -272,8 +283,8 @@ const Quiz = () => {
 
     useEffect(() => {
         // Shuffle options when currentIndex changes
-        if (currentIndex < quiz.length) {
-            const options = [...quiz[currentIndex].option];
+        if (currentIndex < questionArray.length) {
+            const options = [...questionArray[currentIndex].Options];
             const shuffledUseEffect = shuffleOptions(options);
             setShuffledOptions(shuffledUseEffect);
         }
@@ -323,16 +334,16 @@ const Quiz = () => {
                                 </div>
                             </div>
                             <p className='quiz-top-txt'>
-                                {qstnCount}/{quiz.length}
+                                {qstnCount}/{questionArray.length}
                             </p>
                         </div>
                         <div className="quiz-question">
-                            <p className='question-text'>Q{qstnCount}. {quiz[currentIndex].question}</p>
+                            <p className='question-text'>Q{qstnCount}. {questionArray[currentIndex]?.Question}</p>
                         </div>
                         <div className="quiz-options-div">
                             <div className="quiz-options-box">
                                 {
-                                    shuffledOptions.map((item, index) => {
+                                    shuffledOptions?.map((item, index) => {
                                         return (
                                             <div className={`options ${selectedOption === item ? 'clicked' : ''}`} key={index} onClick={() => { checkOptions(item) }}>
                                                 <p className='options-text'>{item}</p>
@@ -357,7 +368,7 @@ const Quiz = () => {
                     <p className='scb-txt1'>You have done a great job </p>
                     <p className='scb-txt1'>Your Timing is {time.h} hrs {time.m} min {time.s} sec</p>
                     <p className='scb-txt2'>Score</p>
-                    <p className='scb-txt3'>{score}/{quiz.length}</p>
+                    <p className='scb-txt3'>{score}/{questionArray.length}</p>
                     <button className='quiz-button-restart' onClick={() => { restartQuiz() }}>
                         <img
                             src={play}
@@ -372,6 +383,10 @@ const Quiz = () => {
                     <button className='logOut-btn' onClick={() => { LogOut() }}>
                         <Link to={'/'}>
                             Log Out
+                        </Link>
+                    </button>
+                    <button className='logOut-btn'>
+                        <Link to={'/scoreSheet'}> ScoreBoard
                         </Link>
                     </button>
                 </div>)
