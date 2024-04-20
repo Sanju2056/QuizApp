@@ -4,9 +4,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../firebase'
 import './index.css'
 import home from '/home.png'
-
+import { useNavigate } from 'react-router-dom';
+import useTheme from '../../hooks/useTheme';
 const ScoreSheet = () => {
     const [timeRecords, setTimeRecords] = useState([])
+    const { theme, setCurrentTheme } = useTheme()
+    const navigate = useNavigate()
     const fetchFrmFb = async () =>{
         const fireBaseData = await getDocs(collection(db, "PlayersScoreInfo"))
         fireBaseData.docs.forEach(async (document) => {
@@ -66,7 +69,7 @@ const ScoreSheet = () => {
 
         useEffect(() => {
         const data = JSON.parse(localStorage.getItem("userInfo"))
-        console.log(data)
+        console.log("data", data)
         function getMs(time) {
             return (time.h * 3600 * 1000) + (time.m * 60 * 1000) + (time.s * 1000) + time.ms
         }
@@ -153,7 +156,14 @@ const ScoreSheet = () => {
 
 
     return (
-        <div className='sb-main'>
+        <div className='sb-main' style={{
+            backgroundColor: theme.primary
+        }}>
+         <div className='lpss-sec'>
+                <button
+                    onClick={() => setCurrentTheme((prev) => (prev === 'light') ? 'dark' : 'light')}
+                    className='toggless-btn'>Dark Mode</button>
+            </div>
             <div className='sb-container'>
                 <p className='title-txt-sb'>Scoreboard</p>
                 <p className='title-txt-sb1'>List of top 10 players</p>
@@ -197,8 +207,7 @@ const ScoreSheet = () => {
                     }
 
                 </div>
-                <Link to={'/startPage'} >
-                    <button className='sb-btn'>
+                    <button className='sb-btn' onClick={()=>{navigate('/startPage')}}>
                         <img
                             src={home}
                             height={"35px"}
@@ -206,7 +215,6 @@ const ScoreSheet = () => {
                         />
                         <p className='sb-btn-txt'>Home</p>
                     </button>
-                </Link>
             </div>
 
         </div>

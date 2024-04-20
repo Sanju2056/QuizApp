@@ -1,11 +1,13 @@
 import './index.css'
-import { useState ,} from 'react'
+import { useState, } from 'react'
 import { Link } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import useTheme from '../../hooks/useTheme';
 const SignUpPage = () => {
+    const { theme, setCurrentTheme } = useTheme()
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [firstName, setFirstName] = useState();
@@ -35,12 +37,12 @@ const SignUpPage = () => {
         //     return
         // }
 
-         if (email && emailRegExp.test(email) && email.length) {
-                console.log('valid email')
-            } else {
-                console.log('invalid email')
-                return
-            }
+        if (email && emailRegExp.test(email) && email.length) {
+            console.log('valid email')
+        } else {
+            console.log('invalid email')
+            return
+        }
 
         if (password && passwordRegExp.test(password) && password.length) {
             console.log('valid password')
@@ -136,7 +138,7 @@ const SignUpPage = () => {
                 console.log('user provider data', user.providerData)
                 navigate('/')
             }
-        )
+            )
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -150,7 +152,14 @@ const SignUpPage = () => {
 
 
     return (
-        <div className='sup-main'>
+        <div className='sup-main' style={{
+            backgroundColor: theme.primary
+          }}>
+            <div className='lps-sec'>
+                <button
+                    onClick={() => setCurrentTheme((prev) => (prev === 'light') ? 'dark' : 'light')}
+                    className='toggles-btn'>Dark Mode</button>
+            </div>
             <div className='sp-box'>
                 <div className='sp-heading-div'>
                     <p className='sp-heading'>Register</p>

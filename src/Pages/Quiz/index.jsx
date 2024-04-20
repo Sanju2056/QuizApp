@@ -7,6 +7,8 @@ import { userSession } from '../../App';
 import { getAuth, signOut } from "firebase/auth";
 import { collection, addDoc, getDocs, updateDoc, doc, query, where } from "firebase/firestore";
 import { db } from '../../firebase'
+import useTheme from '../../hooks/useTheme'
+import { useNavigate } from 'react-router-dom'
 
 
 const Quiz = () => {
@@ -15,12 +17,13 @@ const Quiz = () => {
     const [status, setStatus] = useState(0);
     const { currentUser, setCurrentUser } = useContext(userSession)
     const [questionArray, setQuestionArray] = useState([])
-    
+    const navigate = useNavigate()
+
     // Get question from firebase
-    const questionRef = async () =>{
-    const quizInfo = await getDocs(collection(db,"QuestionArray"))
-     const quizArray = (quizInfo.docs.map(doc=>doc.data()))  
-     setQuestionArray(quizArray)
+    const questionRef = async () => {
+        const quizInfo = await getDocs(collection(db, "QuestionArray"))
+        const quizArray = (quizInfo.docs.map(doc => doc.data()))
+        setQuestionArray(quizArray)
     }
     useEffect(() => {
         console.log('hello')
@@ -269,6 +272,7 @@ const Quiz = () => {
         setShowScore(false)
         setQstnCount(1)
         reset()
+        navigate('/quiz')
     }
 
     // Function to shuffle options
@@ -304,6 +308,7 @@ const Quiz = () => {
         localStorage.removeItem('currentUser')
         const auth = getAuth();
         signOut(auth).then(() => {
+            navigate('/')
             // Sign-out successful.
         }).catch((error) => {
             // An error happened.
@@ -311,10 +316,19 @@ const Quiz = () => {
         });
     }
 
+    const { theme, setCurrentTheme } = useTheme()
 
 
     return (
-        <div className="quiz-main">
+        <div className="quiz-main" style={{
+            backgroundColor: theme.primary
+        }} >
+            <div className='lpss-sec'>
+                <button
+                    onClick={() => setCurrentTheme((prev) => (prev === 'light') ? 'dark' : 'light')}
+                    className='toggless-btn'>Dark Mode</button>
+            </div>
+
             {
                 !showScore ? <div className="quiz-container">
                     <div style={{ width: "100%", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -354,15 +368,23 @@ const Quiz = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='quiz-buttons-container'>
+                    <div className='quiz-buttons-container' >
                         {/* disabled={currentIndex === 0} */}
-                        <button className='quiz-button' onClick={() => { updatePrevQuestion() }} ><p className='quiz-button-text' >Prev</p></button>
+                        <button className='quiz-button' style={{
+                            backgroundColor: theme.primary
+                        }} onClick={() => { updatePrevQuestion() }} ><p className='quiz-button-text' >Prev</p></button>
                         {/* disabled={currentIndex === quiz.length-1} */}
-                        <button className='quiz-button' onClick={() => { updateNextQuestion() }} ><p className='quiz-button-text'>Next</p></button>
+                        <button className='quiz-button' style={{
+                            backgroundColor: theme.primary
+                        }} onClick={() => { updateNextQuestion() }} ><p className='quiz-button-text'>Next</p></button>
                     </div>
 
 
-                </div> : (<div className='score-box'>
+                </div> : (<div className='score-box'
+                    style={{
+                        backgroundColor: theme.primary
+                    }}
+                >
 
                     <p className='scb-title'>Congratulations! </p>
                     <p className='scb-txt1'>You have done a great job </p>
@@ -375,23 +397,19 @@ const Quiz = () => {
                             height={"50px"}
                             width={"50px"}
                         />
-                        <Link to={'/startPage'}>
-                            <p className='quiz-button-text-sb'>Play Again</p>
-
-                        </Link>
+                        <p className='quiz-button-text-sb'>Play Again</p>
                     </button>
-                    <button className='logOut-btn' onClick={() => { LogOut() }}>
-                        <Link to={'/'}>
+                    <div className='share-btn'>
+                        <button className='logOut-btn' onClick={() => { LogOut() }}>
                             Log Out
-                        </Link>
-                    </button>
-                    <button className='logOut-btn'>
-                        <Link to={'/scoreSheet'}> ScoreBoard
-                        </Link>
-                    </button>
+                        </button>
+                        <button className='logOut-btn' onClick={() => { navigate('/scoreSheet') }}>
+                            ScoreBoard
+                        </button>
+                    </div>
                 </div>)
             }
-        </div>
+        </div >
     )
 }
 

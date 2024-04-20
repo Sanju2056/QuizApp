@@ -6,8 +6,10 @@ import { userSession } from '../../App';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { db } from '../../firebase';
+import useTheme from '../../hooks/useTheme';
 
 const LoginPage = () => {
+  const { theme, setCurrentTheme } = useTheme()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
   const { currentUser, setCurrentUser } = useContext(userSession)
@@ -17,26 +19,26 @@ const LoginPage = () => {
 
   const auth = getAuth();
 
-  
 
-  const handleSubmit =  (e) => {
+
+  const handleSubmit = (e) => {
     console.log('he')
     signInWithEmailAndPassword(auth, email, password)
-    .then(async(userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user)
-      setCurrentUser(user.email)
-      console.log(currentUser)
-      const q = query(collection(db, "Users-Credentials"), where("Email", "==", user.email));
-      const fireBaseData = await getDocs(q);
-      // console.log(fireBaseData.docs)
-      fireBaseData.docs.forEach(async (document) => {
-        const TimeArray = document.data()
-        console.log(TimeArray)
-        // ...
-        navigate('/startPage')
-      })
+      .then(async (userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user)
+        setCurrentUser(user.email)
+        console.log(currentUser)
+        const q = query(collection(db, "Users-Credentials"), where("Email", "==", user.email));
+        const fireBaseData = await getDocs(q);
+        // console.log(fireBaseData.docs)
+        fireBaseData.docs.forEach(async (document) => {
+          const TimeArray = document.data()
+          console.log(TimeArray)
+          // ...
+          navigate('/startPage')
+        })
 
       })
       .catch((error) => {
@@ -68,18 +70,6 @@ const LoginPage = () => {
   }
 
 
-  // const [minute, setMinute] = useState()
-  // const [hour, setHour] = useState()
-  // let second = 0;
-  // const convertTime = () => {
-  //   second++;
-  //   console.log(second)
-    // setMinute(second % 60);
-    // console.log(minute)
-    // setHour(minute % 60);
-    // console.log(hour)
-  // }
-
 
   useEffect(() => {
     console.log(currentUser)
@@ -90,10 +80,17 @@ const LoginPage = () => {
 
 
   return (
-    <div className='lp-main'>
+    <div style={{
+      backgroundColor: theme.primary
+    }} className='lp-main'>
+      <div className='lp-sec'>
+        <button
+          onClick={() => setCurrentTheme((prev) => (prev === 'light') ? 'dark' : 'light')}
+          className='toggle-btn'>Dark Mode</button>
+      </div>
       <div className='lp-box'>
         <div className='lg-title-div'>
-          <p className='lg-title'>Login </p>
+          <p className='lg-title'>Login</p>
           <p className='lg-title-txt'>Enter your credential to access your account</p>
         </div>
         <form className='lg-form-div-container' onSubmit={(e) => { handleSubmit(e) }}>
@@ -131,18 +128,6 @@ const LoginPage = () => {
 
       </div>
 
-      <div>
-        {/* <button onClick={() => { timer() }}> timmer </button> */}
-        {/* <div className="main-section">
-          <div className="clock-holder">
-            <div className="stopwatch">
-              <DisplayComponent time={time} />
-              <BtnComponent status={status} resume={resume} reset={reset} stop={stop} start={start} />
-            </div>
-          </div>
-        </div> */}
-        
-      </div>
     </div>
   )
 }
