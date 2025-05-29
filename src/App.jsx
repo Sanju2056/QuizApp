@@ -17,10 +17,10 @@ function App() {
     <div className='App'>
       <userSession.Provider value={{currentUser,setCurrentUser}}>
         <Routes>
-          <Route path='/' element={<LoginPage />} />
-          <Route path='/signUpPage' element={<SignUpPage />} />
+          {/* <Route path='/' element={<LoginPage />} /> */}
+          {/* <Route path='/' element={<SignUpPage />} /> */}
           <Route path='/quiz' element={<Quiz />} />
-          <Route path='/startPage' element={<StartPage />} />
+          <Route path='/' element={<StartPage />} />
           <Route path='/scoreSheet' element={<ScoreSheet />} />
           <Route path='/adminPage' element={<AdminPage/>} />
         </Routes>

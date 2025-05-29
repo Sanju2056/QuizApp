@@ -87,11 +87,11 @@ const LoginPage = () => {
     <div style={{
       backgroundColor: theme.primary
     }} className='lp-main'>
-      <div className='lp-sec'>
+      {/* <div className='lp-sec'>
         <button
           onClick={() => setCurrentTheme((prev) => (prev === 'light') ? 'dark' : 'light')}
           className='toggle-btn'>Dark Mode</button>
-      </div>
+      </div> */}
       <div className='lp-box'>
         <div className='lg-title-div'>
           <p className='lg-title'>Login</p>

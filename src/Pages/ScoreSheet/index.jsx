@@ -159,11 +159,11 @@ const ScoreSheet = () => {
         <div className='sb-main' style={{
             backgroundColor: theme.primary
         }}>
-         <div className='lpss-sec'>
+         {/* <div className='lpss-sec'>
                 <button
                     onClick={() => setCurrentTheme((prev) => (prev === 'light') ? 'dark' : 'light')}
                     className='toggless-btn'>Dark Mode</button>
-            </div>
+            </div> */}
             <div className='sb-container'>
                 <p className='title-txt-sb'>Scoreboard</p>
                 <p className='title-txt-sb1'>List of top 10 players</p>
