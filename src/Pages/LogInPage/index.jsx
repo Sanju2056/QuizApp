@@ -22,52 +22,56 @@ const LoginPage = () => {
 
 
   const handleSubmit = (e) => {
-    console.log('he')
-    signInWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user)
-        setCurrentUser(user.email)
-        console.log(currentUser)
-        const q = query(collection(db, "Users-Credentials"), where("Email", "==", user.email));
-        const fireBaseData = await getDocs(q);
-        // console.log(fireBaseData.docs)
-        fireBaseData.docs.forEach(async (document) => {
-          const TimeArray = document.data()
-          console.log(TimeArray)
-          // ...
-          navigate('/startPage')
-        })
-
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode == 'auth/invalid-credential') {
-          alert("Email doesn't exist ")
-        }
-        console.log(errorCode, errorMessage)
-
-      });
+    navigate('/startPage')
     e.preventDefault()
-    // console.log(email, password)
-    // const data = JSON.parse(localStorage.getItem("userInfo"))
-    // console.log(data)
-    // const filteredData = data.filter((item) => item.email == email && item.password == password)
-    // if (email == '' && password == '') {
-    //   alert('Enter Email and Password')
-    // }
-    // else if (filteredData.length == 0) {
-    //   alert('User Doesnt exist ')
-    // }
-    // else {
-    //   localStorage.setItem('currentUser', email)
-    //   setCurrentUser(email)
-    //   navigate('/quiz')
-    //   console.log(currentUser)
-    // }
   }
+  //   {
+  //   console.log('he')
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then(async (userCredential) => {
+  //       // Signed in 
+  //       const user = userCredential.user;
+  //       console.log(user)
+  //       setCurrentUser(user.email)
+  //       console.log(currentUser)
+  //       const q = query(collection(db, "Users-Credentials"), where("Email", "==", user.email));
+  //       const fireBaseData = await getDocs(q);
+  //       // console.log(fireBaseData.docs)
+  //       fireBaseData.docs.forEach(async (document) => {
+  //         const TimeArray = document.data()
+  //         console.log(TimeArray)
+  //         // ...
+  //         navigate('/startPage')
+  //       })
+
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       if (errorCode == 'auth/invalid-credential') {
+  //         alert("Email doesn't exist ")
+  //       }
+  //       console.log(errorCode, errorMessage)
+
+  //     });
+  //   e.preventDefault()
+  //   // console.log(email, password)
+  //   // const data = JSON.parse(localStorage.getItem("userInfo"))
+  //   // console.log(data)
+  //   // const filteredData = data.filter((item) => item.email == email && item.password == password)
+  //   // if (email == '' && password == '') {
+  //   //   alert('Enter Email and Password')
+  //   // }
+  //   // else if (filteredData.length == 0) {
+  //   //   alert('User Doesnt exist ')
+  //   // }
+  //   // else {
+  //   //   localStorage.setItem('currentUser', email)
+  //   //   setCurrentUser(email)
+  //   //   navigate('/quiz')
+  //   //   console.log(currentUser)
+  //   // }
+  // }
 
 
 
